@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     address: DataTypes.STRING,
     neighborhood: DataTypes.STRING,
     borough: DataTypes.STRING,
-    tite: DataTypes.STRING,
+    title: DataTypes.STRING,
     description: DataTypes.TEXT,
     price: DataTypes.INTEGER,
     guests: DataTypes.INTEGER,
@@ -17,6 +17,7 @@ module.exports = (sequelize, DataTypes) => {
     // associations can be defined here
     Spot.belongsTo(models.User, { foreignKey: 'userId' });
     Spot.hasMany(models.Review, { foreignKey: 'spotId' });
+    Spot.hasMany(models.Image, { foreignKey: 'spotId' });
   };
   return Spot;
 };
