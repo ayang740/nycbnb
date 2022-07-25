@@ -37,7 +37,7 @@ export const getSpots = () => async dispatch => {
       const spots = await response.json();
       dispatch(loadSpot(spots));
       return response;
-    } else return response.json()
+    } 
   };
 
 //add spot
@@ -61,9 +61,8 @@ export const removeSpot = spotId => async dispatch => {
       method: 'DELETE',
     });
     if (response.ok) {
-      const spotId = await response.json();
       dispatch(deleteSpot(spotId));
-      return spotId;
+
     }
   }
 
@@ -74,10 +73,11 @@ const spotReducer = (state = initialState, action) => {
     let newState = { ...state };
     switch(action.type) {
         case LOAD:
+            const newState2 = {}
             action.spots.forEach(spot => {
-                newState[spot.id] = spot
+                newState2[spot.id] = spot
             });
-            return newState;
+            return newState2;
         case CREATE:
             newState[action.spot.id] = action.spot
             return newState;

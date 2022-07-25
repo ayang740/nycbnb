@@ -8,17 +8,17 @@ function AddSpot() {
     const dispatch = useDispatch();
     const history = useHistory();
     
-    const [address, setAddress] = useState('');
-    const [neighborhood, setNeighborhood] = useState('');
+    const [address, setAddress] = useState('somewhere');
+    const [neighborhood, setNeighborhood] = useState('somewhere');
     const [borough, setBorough] = useState('Manhatten');
-    const [title, setTitle] = useState('');
-    const [description, setDescription] = useState('');
-    const [price, setPrice] = useState(0);
-    const [guests, setGuests] = useState(0);
-    const [bedrooms, setBedrooms] = useState(0);
-    const [beds, setBeds] = useState(0);
-    const [baths, setBaths] = useState(0);
-    const [images, setImages] = useState({})
+    const [title, setTitle] = useState('new place');
+    const [description, setDescription] = useState('nice place');
+    const [price, setPrice] = useState(1);
+    const [guests, setGuests] = useState(1);
+    const [bedrooms, setBedrooms] = useState(1);
+    const [beds, setBeds] = useState(1);
+    const [baths, setBaths] = useState(1);
+    const [images, setImages] = useState('')
     
     const sessionUser = useSelector(state => state.session.user);
     let userId;
@@ -39,7 +39,9 @@ function AddSpot() {
           bedrooms,
           beds,
           baths,
-          userId
+          userId,
+          images,
+
         };
         
         
@@ -145,10 +147,9 @@ function AddSpot() {
                 </label>
                 <label> Upload Images:
                     <input 
-                        type="file"
-                        multiple
-                        name="file"
-                        onChange={(e) => setImages(e.target.files)}
+                        type="text"
+                        value={images}
+                        onChange={(e) => setImages(e.target.value)}
                     />
                 </label>
                 <button type="submit">Add Listing</button>

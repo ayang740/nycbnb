@@ -27,9 +27,9 @@ router.get('/:spotId(\\d+)',
 //post spot
 router.post('/',
   asyncHandler(async (req, res) => {
-    const { address, neighborhood, borough, title, description, price, guests, bedrooms, beds, baths, userId } = req.body;
+    const { address, neighborhood, borough, title, description, price, guests, bedrooms, beds, baths, userId, images } = req.body;
 
-    const spot = Spot.build({
+    const spot = await Spot.create({
         address,
         neighborhood,
         borough,
@@ -43,13 +43,20 @@ router.post('/',
         userId
     });
 
-    const newSpot = await spot.save({raw: true})
+    const image = {
+      url: images,
+      spotId : spot.id
+      
+    } 
 
-    const response = {
-        ...newSpot.dataValues
-    }
+    await Image.create(image)
 
-    return res.json(response)
+    const createdSpot = await Spot.findByPk(spot.id, {
+      include: [{model: Image}]
+    })
+    
+
+    return res.json(createdSpot)
   })
 );
 //edit spot
@@ -84,7 +91,6 @@ router.delete('/:spotId',
   asyncHandler(async (req, res) => {
     const deleteSpot = await Spot.findByPk(req.params.spotId);
     await deleteSpot.destroy();
-    return res.json({id});
   })
 );
 
