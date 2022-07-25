@@ -10,7 +10,7 @@ function AddSpot() {
     
     const [address, setAddress] = useState('');
     const [neighborhood, setNeighborhood] = useState('');
-    const [borough, setBorough] = useState('');
+    const [borough, setBorough] = useState('Manhatten');
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState(0);
@@ -18,13 +18,14 @@ function AddSpot() {
     const [bedrooms, setBedrooms] = useState(0);
     const [beds, setBeds] = useState(0);
     const [baths, setBaths] = useState(0);
+    const [images, setImages] = useState({})
     
     const sessionUser = useSelector(state => state.session.user);
     let userId;
     if (sessionUser) userId = sessionUser.id;
     if (!sessionUser) return <Redirect to="/login" />;
 
-    const handleSubmit = async (e) => {
+    const handleSubmitSpot = async (e) => {
         e.preventDefault();
     
         const spotData = {
@@ -46,6 +47,7 @@ function AddSpot() {
         history.push(`/`);
         return newSpot;
       };
+      
 
       const handleCancelClick = (e) => {
         e.preventDefault();
@@ -55,7 +57,7 @@ function AddSpot() {
       return (
         <div>
             <h1>New Spot</h1>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmitSpot}>
                 <label> Address:
                     <input 
                         type="text"
@@ -139,6 +141,14 @@ function AddSpot() {
                         min='1'
                         onChange={(e) => setBaths(e.target.value)}
                         required
+                    />
+                </label>
+                <label> Upload Images:
+                    <input 
+                        type="file"
+                        multiple
+                        name="file"
+                        onChange={(e) => setImages(e.target.files)}
                     />
                 </label>
                 <button type="submit">Add Listing</button>

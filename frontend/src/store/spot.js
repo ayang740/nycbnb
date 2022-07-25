@@ -40,18 +40,31 @@ export const getSpots = () => async dispatch => {
     } else return response.json()
   };
 
-  //add spot
-  export const createSpot = (spotData) => async dispatch => {
-    const response = await csrfFetch(`/api/spots`, {
-        method: 'POST',
-        headers: { 'Content-Type' : 'application/json' },
-        body: JSON.stringify(spotData)
+//add spot
+export const createSpot = (spotData) => async dispatch => {
+const response = await csrfFetch(`/api/spots`, {
+    method: 'POST',
+    headers: { 'Content-Type' : 'application/json' },
+    body: JSON.stringify(spotData)
+});
+if (response.ok) {
+    const spot = await response.json()
+    dispatch(addSpot(spot))
+    return spot;
+    }
+}
+
+//delete spot
+
+export const removeSpot = spotId => async dispatch => {
+    const response = await csrfFetch(`/api/spots/${spotId}`, {
+      method: 'DELETE',
     });
     if (response.ok) {
-        const spot = await response.json()
-        dispatch(addSpot(spot))
-        return spot;
-      }
+      const spotId = await response.json();
+      dispatch(deleteSpot(spotId));
+      return spotId;
+    }
   }
 
 //reducer
@@ -67,6 +80,9 @@ const spotReducer = (state = initialState, action) => {
             return newState;
         case CREATE:
             newState[action.spot.id] = action.spot
+            return newState;
+        case DELETE:
+            delete newState[action.spot.id]
             return newState
         default:
             return state;

@@ -43,17 +43,17 @@ router.post('/',
         userId
     });
 
-    const result = await spot.save({raw: true})
+    const newSpot = await spot.save({raw: true})
 
     const response = {
-        ...result.dataValues
+        ...newSpot.dataValues
     }
 
     return res.json(response)
   })
 );
 //edit spot
-router.put('/:digId(\\d+)',
+router.put('/:spotId(\\d+)',
   asyncHandler(async (req, res) => {
     const { address, neighborhood, borough, title, description, price, guests, bedrooms, beds, baths } = req.body;
     const spot = await Spot.findByPk(req.params.spotId);
@@ -80,11 +80,11 @@ router.put('/:digId(\\d+)',
 );
 
 //delete spot
-router.delete('/:digId(\\d+)',
+router.delete('/:spotId',
   asyncHandler(async (req, res) => {
-    const spot = await Spot.findByPk(req.params.spotId);
-    await spot.destroy();
-    return res.json({id: spot.id});
+    const deleteSpot = await Spot.findByPk(req.params.spotId);
+    await deleteSpot.destroy();
+    return res.json({id});
   })
 );
 
