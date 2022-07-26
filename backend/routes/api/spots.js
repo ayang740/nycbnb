@@ -53,7 +53,7 @@ router.post('/',
 
     const createdSpot = await Spot.findByPk(spot.id, {
       include: [{model: Image}]
-    })
+    });
     
 
     return res.json(createdSpot)
@@ -62,27 +62,31 @@ router.post('/',
 //edit spot
 router.put('/:spotId(\\d+)',
   asyncHandler(async (req, res) => {
-    const { address, neighborhood, borough, title, description, price, guests, bedrooms, beds, baths } = req.body;
-    const spot = await Spot.findByPk(req.params.spotId);
+    const { address, neighborhood, borough, title, description, price, guests, bedrooms, beds, baths, images } = req.body;
+    const spot = await Spot.findByPk(req.params.spotId, {
+      include: [{model: Image}]
+  });
 
-    spot.address = address;
-    spot.neighborhood = neighborhood;
-    spot.borough = borough;
-    spot.title = title;
-    spot.desription = description;
-    spot.price = price;
-    spot.guests = guests;
-    spot.bedrooms = bedrooms;
-    spot.beds = beds;
-    spot.baths = baths;
+    await spot.update({
+      address,
+      neighborhood,
+      borough,
+      title,
+      description,
+      price,
+      guests,
+      bedrooms,
+      beds,
+      baths,
 
-    const result = await spot.save()
+    });
 
-    const response = {
-        ...result.dataValues
-    }
+    await Image.update({
+      url: images,
+      spotId : spot.id
+    })
 
-    return res.json(response);
+    return res.json(spot);
   })
 );
 

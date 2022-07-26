@@ -1,31 +1,40 @@
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useHistory, Redirect } from 'react-router-dom';
-import { createSpot } from '../../store/spot';
-import './addSpot.css';
+import { useHistory, useParams } from 'react-router-dom';
+import { editSpot, getSpots } from "../../store/spot";
+import './editSpot.css'
 
-const AddSpot = () => {
+const EditSpot = () => {
     const dispatch = useDispatch();
+    const { spotId } = useParams()
+    const spot = useSelector((state) => state.spot[spotId]);
+    console.log(spotId)
+    console.log(spot)
     const history = useHistory();
-    
-    const [address, setAddress] = useState('somewhere');
-    const [neighborhood, setNeighborhood] = useState('somewhere');
-    const [borough, setBorough] = useState('Manhatten');
-    const [title, setTitle] = useState('new place');
-    const [description, setDescription] = useState('nice place');
-    const [price, setPrice] = useState(1);
-    const [guests, setGuests] = useState(1);
-    const [bedrooms, setBedrooms] = useState(1);
-    const [beds, setBeds] = useState(1);
-    const [baths, setBaths] = useState(1);
-    const [images, setImages] = useState('')
-    
-    const sessionUser = useSelector(state => state.session.user);
-    let userId;
-    if (sessionUser) userId = sessionUser.id;
-    if (!sessionUser) return <Redirect to="/login" />;
 
-    const handleSubmitSpot = async (e) => {
+    
+    const [address, setAddress] = useState(spot.address);
+    const [neighborhood, setNeighborhood] = useState(spot.neighborhood);
+    const [borough, setBorough] = useState(spot.borough);
+    const [title, setTitle] = useState(spot.title);
+    const [description, setDescription] = useState(spot.description);
+    const [price, setPrice] = useState(spot.price);
+    const [guests, setGuests] = useState(spot.guests);
+    const [bedrooms, setBedrooms] = useState(spot.bedrooms);
+    const [beds, setBeds] = useState(spot.beds);
+    const [baths, setBaths] = useState(spot.baths);
+    const [images, setImages] = useState(spot.images);
+    
+    useEffect(() => {
+        dispatch(getSpots())
+    }, [dispatch])
+
+    const handleCancelClick = (e) => {
+        e.preventDefault();
+        history.push('/');
+    };
+
+    const handleEditSpot = async (e) => {
         e.preventDefault();
     
         const spotData = {
@@ -39,27 +48,20 @@ const AddSpot = () => {
           bedrooms,
           beds,
           baths,
-          userId,
           images,
 
         };
         
         
-        const newSpot = await dispatch(createSpot(spotData));
-        history.push(`/`);
-        return newSpot;
+        const updatedSpot = await dispatch(editSpot(spotData));
+        history.push(`/spots/${spot.id}`);
+        return updatedSpot
       };
-      
-
-      const handleCancelClick = (e) => {
-        e.preventDefault();
-        history.push('/');
-    };
 
       return (
         <div>
-            <h1>New Spot</h1>
-            <form onSubmit={handleSubmitSpot}>
+            <h1>Edit Spot</h1>
+            <form onSubmit={handleEditSpot}>
                 <label> Address:
                     <input 
                         type="text"
@@ -152,12 +154,13 @@ const AddSpot = () => {
                         onChange={(e) => setImages(e.target.value)}
                     />
                 </label>
-                <button type="submit">Add Listing</button>
+                <button type="submit">Edit Listing</button>
                 <button type="button" onClick={handleCancelClick}>Cancel</button>
             </form>
         </div>
       )
+    
 
 }
 
-export default AddSpot
+export default EditSpot

@@ -9,9 +9,8 @@ const OneSpot = () => {
     const dispatch = useDispatch()
     const sessionUser = useSelector(state => state.session.user);
     const { spotId } = useParams()
-    const history = useHistory()
-
     const spot = useSelector((state) => state.spot[spotId]);
+    const history = useHistory()
 
     useEffect(() => {
         dispatch(getSpots())
