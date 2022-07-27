@@ -27,9 +27,9 @@ router.get('/:spotId(\\d+)',
 //post spot
 router.post('/',
   asyncHandler(async (req, res) => {
-    const { address, neighborhood, borough, title, description, price, guests, bedrooms, beds, baths, userId } = req.body;
+    const { address, neighborhood, borough, title, description, price, guests, bedrooms, beds, baths, userId, images } = req.body;
 
-    const spot = Spot.build({
+    const spot = await Spot.create({
         address,
         neighborhood,
         borough,
@@ -43,48 +43,58 @@ router.post('/',
         userId
     });
 
-    const result = await spot.save({raw: true})
+    const image = {
+      url: images,
+      spotId : spot.id
+      
+    } 
 
-    const response = {
-        ...result.dataValues
-    }
+    await Image.create(image)
 
-    return res.json(response)
+    const createdSpot = await Spot.findByPk(spot.id, {
+      include: [{model: Image}]
+    });
+    
+
+    return res.json(createdSpot)
   })
 );
 //edit spot
-router.put('/:digId(\\d+)',
+router.put('/:spotId(\\d+)',
   asyncHandler(async (req, res) => {
-    const { address, neighborhood, borough, title, description, price, guests, bedrooms, beds, baths } = req.body;
-    const spot = await Spot.findByPk(req.params.spotId);
+    const { address, neighborhood, borough, title, description, price, guests, bedrooms, beds, baths, images } = req.body;
+    const spot = await Spot.findByPk(req.params.spotId, {
+      include: [{model: Image}]
+  });
 
-    spot.address = address;
-    spot.neighborhood = neighborhood;
-    spot.borough = borough;
-    spot.title = title;
-    spot.desription = description;
-    spot.price = price;
-    spot.guests = guests;
-    spot.bedrooms = bedrooms;
-    spot.beds = beds;
-    spot.baths = baths;
+    await spot.update({
+      address,
+      neighborhood,
+      borough,
+      title,
+      description,
+      price,
+      guests,
+      bedrooms,
+      beds,
+      baths,
 
-    const result = await spot.save()
+    });
 
-    const response = {
-        ...result.dataValues
-    }
+    await Image.update({
+      url: images,
+      spotId : spot.id
+    })
 
-    return res.json(response);
+    return res.json(spot);
   })
 );
 
 //delete spot
-router.delete('/:digId(\\d+)',
+router.delete('/:spotId',
   asyncHandler(async (req, res) => {
-    const spot = await Spot.findByPk(req.params.spotId);
-    await spot.destroy();
-    return res.json({id: spot.id});
+    const deleteSpot = await Spot.findByPk(req.params.spotId);
+    await deleteSpot.destroy();
   })
 );
 
