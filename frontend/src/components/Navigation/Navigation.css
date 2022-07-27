@@ -1,0 +1,45 @@
+.nav {
+    position: sticky;
+    background-color: white;
+    width: 100%;
+    height: 50px;
+    border-bottom: 1px solid lightgrey;
+    top: 0px;
+    padding: 0;
+    margin: 0;
+    padding-bottom: 20px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.nav-bar {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding-top: 20px;
+    margin-bottom: 20px;
+}
+
+.home {
+    text-decoration: none;
+    color: #FF5A5F;
+    font-size: 26px;
+    font-weight: bold;
+}
+
+.host-home {
+    text-decoration: none;
+    color: black;
+    font-size: 18px;
+    border: 1px solid white;
+    border-radius: 18px;
+    padding: 6px 4px;
+}
+
+.host-home:hover {
+    background-color: rgb(241, 241, 241);
+    border-radius: 18px;
+    font-size: 18px;
+    border: 1px solid rgb(241, 241, 241);
+    padding: 6px 4px;
+}

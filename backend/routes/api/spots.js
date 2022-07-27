@@ -64,7 +64,7 @@ router.put('/:spotId(\\d+)',
   asyncHandler(async (req, res) => {
     const { address, neighborhood, borough, title, description, price, guests, bedrooms, beds, baths, images } = req.body;
     const spot = await Spot.findByPk(req.params.spotId, {
-      include: [{model: Image}]
+      include: [Image]
   });
 
     await spot.update({
@@ -81,7 +81,10 @@ router.put('/:spotId(\\d+)',
 
     });
 
-    await Image.update({
+    const updateImage = await Image.findOne({
+      where: {spotId: spot.id}
+    })
+    await updateImage.update({
       url: images,
       spotId : spot.id
     })
