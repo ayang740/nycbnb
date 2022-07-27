@@ -1,4 +1,4 @@
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useHistory, Link } from 'react-router-dom';
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { getSpots, removeSpot } from '../../store/spot';
@@ -12,6 +12,8 @@ const OneSpot = () => {
     const spot = useSelector((state) => state.spot[spotId]);
     const history = useHistory()
 
+    const spotImages = spot?.Images
+
     useEffect(() => {
         dispatch(getSpots())
     }, [dispatch])
@@ -23,27 +25,41 @@ const OneSpot = () => {
     
         return history.push(`/`);
       };
-
+    
+    
     return (
-        <div>
-            <div>{spot?.address}</div>
-            <div>{spot?.neighborhood}</div>
-            <div>{spot?.borough}</div>
-            <div>{spot?.title}</div>
-            <div>{spot?.description}</div>
-            <div>${spot?.price}/night</div>
-            <div>{spot?.guests} guests</div>
-            <div>{spot?.bedrooms} bedrooms</div>
-            <div>{spot?.beds} beds</div>
-            <div>{spot?.baths} baths</div>
+        <div className='spot-wrapper'>
+            <div className='spot-grid'>
+                <div>{spot?.title}</div>
+                <div>{spot?.address}, {spot?.neighborhood}, {spot?.borough}</div>
+                <div className='spot-images'>
+                    {spotImages && spotImages.map(image => {
+                        return (
+                            <img className='spot-image' src={image.url} alt="array"/>
+                        )
+                    })}
+                </div>
+                
+                <div>${spot?.price}/night</div>
+                <div className='spot-accommodations'>
+                    <div>{spot?.guests} guests </div>
+                    <div>{spot?.bedrooms} bedrooms</div>
+                    <div>{spot?.beds} beds</div>
+                    <div>{spot?.baths} baths</div>
+                </div>
+                <div>{spot?.description}</div>
 
-            {sessionUser?.id === spot?.userId && 
-                (
-                    <div>
-                        <button onClick={deleteSpot}>Delete Listing</button>
-                    </div>
-                )
-            }
+                {sessionUser?.id === spot?.userId && 
+                    (
+                        <div>
+                            <Link to={`/spots/${spot.id}/edit`}>
+                                <button>Edit</button>
+                            </Link>
+                            <button onClick={deleteSpot}>Delete Listing</button>
+                        </div>
+                    )
+                }
+            </div>
         </div>
     )
 

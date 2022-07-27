@@ -55,13 +55,12 @@ if (response.ok) {
 }
 
 //edit spot
-export const editSpot = (spotData) => async dispatch => {
-    const response = await csrfFetch(`/api/spots/${spotData.id}`, {
+export const editSpot = (spotData, spotId) => async dispatch => {
+    const response = await csrfFetch(`/api/spots/${spotId}`, {
       method: 'PUT',
       headers: { 'Content-Type' : 'application/json' },
       body: spotData
     });
-  
     if (response.ok) {
       const spot = await response.json();
       dispatch(updateSpot(spot));

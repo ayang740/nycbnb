@@ -57,27 +57,29 @@ const AddSpot = () => {
     };
 
       return (
-        <div>
-            <h1>New Spot</h1>
-            <form onSubmit={handleSubmitSpot}>
-                <label> Address:
-                    <input 
+        <div className='add-spot-wrapper'>
+            <h1 className='add-spot-h1'>Add Your Listing</h1>
+            <form className='add-spot-form' onSubmit={handleSubmitSpot}>
+                <label className='add-spot-label'> Address:
+                    <input
+                        className='add-spot-input'
                         type="text"
                         value={address}
                         onChange={(e) => setAddress(e.target.value)}
                         required
                     />
                 </label>
-                <label> Neighborhood:
-                    <input 
+                <label className='add-spot-label'> Neighborhood:
+                    <input
+                        className='add-spot-input'
                         type="text"
                         value={neighborhood}
                         onChange={(e) => setNeighborhood(e.target.value)}
                         required
                     />
                 </label>
-                <label> Borough:
-                    <select value={borough} onChange={(e) => setBorough(e.target.value)} required>
+                <label className='add-spot-label'> Borough:
+                    <select className='add-spot-input-select' value={borough} onChange={(e) => setBorough(e.target.value)} required>
                         <option >Manhatten</option>
                         <option >Queens</option>
                         <option >Brooklyn</option>
@@ -85,23 +87,18 @@ const AddSpot = () => {
                         <option >Staten Island</option>
                     </select>
                 </label>
-                <label> Title:
+                <label className='add-spot-label'> Title:
                     <input 
+                        className='add-spot-input'
                         type="text"
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
                         required
                     />
                 </label>
-                <label> Description:
-                    <textarea
-                        value={description}
-                        onChange={(e) => setDescription(e.target.value)}
-                        required
-                    />
-                </label>
-                <label> Price per night:
+                <label className='add-spot-label'> Price per night:
                     <input 
+                        className='add-spot-input'
                         type="number"
                         value={price}
                         min='1'
@@ -109,8 +106,9 @@ const AddSpot = () => {
                         required
                     />
                 </label>
-                <label> Guests:
+                <label className='add-spot-label'> Guests:
                     <input 
+                        className='add-spot-input'
                         type="number"
                         value={guests}
                         min='1'
@@ -118,8 +116,9 @@ const AddSpot = () => {
                         required
                     />
                 </label>
-                <label> Bedrooms:
+                <label className='add-spot-label'> Bedrooms:
                     <input 
+                        className='add-spot-input'
                         type="number"
                         value={bedrooms}
                         min='1'
@@ -127,8 +126,9 @@ const AddSpot = () => {
                         required
                     />
                 </label>
-                <label> Beds:
+                <label className='add-spot-label'> Beds:
                     <input 
+                        className='add-spot-input'
                         type="number"
                         value={beds}
                         min='1'
@@ -136,8 +136,9 @@ const AddSpot = () => {
                         required
                     />
                 </label>
-                <label> Baths:
+                <label className='add-spot-label'> Baths:
                     <input 
+                        className='add-spot-input'
                         type="number"
                         value={baths}
                         min='1'
@@ -145,15 +146,26 @@ const AddSpot = () => {
                         required
                     />
                 </label>
-                <label> Upload Images:
+                <label className='add-spot-label'> Upload Images:
                     <input 
+                        className='add-spot-input'
                         type="text"
                         value={images}
                         onChange={(e) => setImages(e.target.value)}
                     />
                 </label>
-                <button type="submit">Add Listing</button>
-                <button type="button" onClick={handleCancelClick}>Cancel</button>
+                <label className='add-spot-label'> Description:
+                    <textarea
+                        className='add-spot-input-textarea'
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                        required
+                    />
+                </label>
+                <div className='add-spot-buttons'>
+                    <button className='add-spot-submit' type="submit">Add Listing</button>
+                    <button className='add-spot-cancel' type="button" onClick={handleCancelClick}>Cancel</button>
+                </div>
             </form>
         </div>
       )

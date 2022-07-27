@@ -20,16 +20,19 @@ const SpotList = () => {
     }
 
     return (
-        <div>
+        <div className="spots-list-wrapper">
             {spots && spots.map(spot => {
                 return (
-                    <Link key={spot.id} to={`/spots/${spot.id}`}>
-                        {spot.Images && spot.Images.length ? <img src={spot.Images[0].url} alt="first impression"/> : null}
-                        <div>
-                            <div>{spot.neighborhood}</div>
-                            <div>{spot.borough}</div>
+                    <Link className="spot-list-link" key={spot.id} to={`/spots/${spot.id}`}>
+                        <div className="spot-list-card">
+                            <div className="spot-list-image-div">
+                                {spot.Images && spot.Images.length ? <img className="spot-list-image" src={spot.Images[0].url} alt="first impression"/> : null}
+                            </div>
+                            <div className="spot-list-text-div">
+                                <div className="spot-list-location">{spot.neighborhood}, {spot.borough}</div>
+                                <div className="spot-list-price">${spot.price}/night</div>
+                            </div>
                         </div>
-                        <div>{spot.price}</div>
                     </Link>
                 )
             })}

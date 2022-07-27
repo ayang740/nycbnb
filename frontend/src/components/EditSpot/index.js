@@ -6,28 +6,46 @@ import './editSpot.css'
 
 const EditSpot = () => {
     const dispatch = useDispatch();
-    const { spotId } = useParams()
+    const { spotId } = useParams();
     const spot = useSelector((state) => state.spot[spotId]);
-    console.log(spotId)
-    console.log(spot)
+
     const history = useHistory();
 
-    
-    const [address, setAddress] = useState(spot.address);
-    const [neighborhood, setNeighborhood] = useState(spot.neighborhood);
-    const [borough, setBorough] = useState(spot.borough);
-    const [title, setTitle] = useState(spot.title);
-    const [description, setDescription] = useState(spot.description);
-    const [price, setPrice] = useState(spot.price);
-    const [guests, setGuests] = useState(spot.guests);
-    const [bedrooms, setBedrooms] = useState(spot.bedrooms);
-    const [beds, setBeds] = useState(spot.beds);
-    const [baths, setBaths] = useState(spot.baths);
-    const [images, setImages] = useState(spot.images);
+    const [address, setAddress] = useState('');
+    const [neighborhood, setNeighborhood] = useState('');
+    const [borough, setBorough] = useState('');
+    const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
+    const [price, setPrice] = useState(1);
+    const [guests, setGuests] = useState(1);
+    const [bedrooms, setBedrooms] = useState(1);
+    const [beds, setBeds] = useState(1);
+    const [baths, setBaths] = useState(1);
+    const [images, setImages] = useState('');
+
+    const addValues = () => {
+        setAddress(spot.address)
+        setNeighborhood(spot.neighborhood)
+        setBorough(spot.borough)
+        setTitle(spot.title)
+        setDescription(spot.description)
+        setPrice(spot.price)
+        setGuests(spot.guests)
+        setBedrooms(spot.bedrooms)
+        setBeds(spot.beds)
+        setBaths(spot.baths)
+        setImages(spot.images)
+    }
     
     useEffect(() => {
         dispatch(getSpots())
     }, [dispatch])
+
+    useEffect(() => {
+        if(spot) {
+            addValues()
+        }
+    },[spot])
 
     const handleCancelClick = (e) => {
         e.preventDefault();
@@ -52,8 +70,7 @@ const EditSpot = () => {
 
         };
         
-        
-        const updatedSpot = await dispatch(editSpot(spotData));
+        const updatedSpot = await dispatch(editSpot(spotData, spotId));
         history.push(`/spots/${spot.id}`);
         return updatedSpot
       };
