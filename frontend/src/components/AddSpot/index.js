@@ -19,6 +19,7 @@ const AddSpot = () => {
     const [beds, setBeds] = useState(1);
     const [baths, setBaths] = useState(1);
     const [images, setImages] = useState('')
+    const [errors, setErrors] = useState([]);
     
     const sessionUser = useSelector(state => state.session.user);
     let userId;
@@ -27,7 +28,6 @@ const AddSpot = () => {
 
     const handleSubmitSpot = async (e) => {
         e.preventDefault();
-    
         const spotData = {
           address,
           neighborhood,
@@ -41,18 +41,20 @@ const AddSpot = () => {
           baths,
           userId,
           images,
-
         };
-        
-        
+
         const newSpot = await dispatch(createSpot(spotData));
-        history.push(`/`);
-        return newSpot;
+
+        if (newSpot) {
+            setErrors([]);
+            history.push(`/`);
+        }
       };
       
 
       const handleCancelClick = (e) => {
         e.preventDefault();
+        setErrors([]);
         history.push('/');
     };
 

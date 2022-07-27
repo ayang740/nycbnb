@@ -42,17 +42,17 @@ export const getSpots = () => async dispatch => {
 
 //add spot
 export const createSpot = (spotData) => async dispatch => {
-const response = await csrfFetch(`/api/spots`, {
-    method: 'POST',
-    headers: { 'Content-Type' : 'application/json' },
-    body: JSON.stringify(spotData)
-});
-if (response.ok) {
-    const spot = await response.json()
-    dispatch(addSpot(spot))
-    return spot;
-    }
-}
+    const response = await csrfFetch(`/api/spots`, {
+        method: 'POST',
+        headers: { 'Content-Type' : 'application/json' },
+        body: JSON.stringify(spotData)
+    });
+    if (response.ok) {
+        const spot = await response.json()
+        dispatch(addSpot(spot))
+        return spot;
+        }
+    };
 
 //edit spot
 export const editSpot = (spotData, spotId) => async dispatch => {
