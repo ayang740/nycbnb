@@ -23,7 +23,7 @@ const updateReview = review => ({
   review
 });
 
-const deleteSpot = reviewId => ({
+const deleteReview = reviewId => ({
   type: DELETE,
   reviewId
 });
@@ -40,7 +40,7 @@ export const getReviews = () => async dispatch => {
     } 
   };
 
-//add spot
+//add review
 export const createReview = (reviewData) => async dispatch => {
     const response = await csrfFetch(`/api/reviews`, {
         method: 'POST',
@@ -68,7 +68,7 @@ export const editReview = (reviewData, reviewId) => async dispatch => {
     }
   };
 
-//delete spot
+//delete review
 
 export const removeReview = reviewId => async dispatch => {
     const response = await csrfFetch(`/api/reviews/${reviewId}`, {
@@ -80,6 +80,7 @@ export const removeReview = reviewId => async dispatch => {
     }
   }
 
+  const initialState = {}
   const reviewReducer = (state = initialState, action) => {
     switch(action.type) {
         case LOAD:
