@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useHistory, useParams, Redirect } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { createReview } from '../../store/review';
 import LoginFormModal from '../LoginFormModal';
 import { useShowModal } from '../addReviewModal';
@@ -19,7 +19,11 @@ const AddReview = () => {
     
     let userId;
     if (sessionUser) userId = sessionUser.id;
-    if (!sessionUser) return <LoginFormModal />;
+    if (!sessionUser) return (
+    <div> Please login to leave a review
+        <LoginFormModal />
+    </div>
+    );
 
     const handleSubmitReview = async (e) => {
         e.preventDefault();

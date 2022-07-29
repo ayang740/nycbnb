@@ -20,6 +20,7 @@ function Navigation({ isLoaded }){
   } else {
     sessionLinks = (
       <>
+        <ProfileButton user={sessionUser} />
         <LoginFormModal />
         <SignUpFormModal />
       </>

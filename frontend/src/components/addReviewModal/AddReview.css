@@ -1,6 +1,4 @@
-.modal-wrapper {
-    border-radius: 18px;
-}
+
 .review-form-wrapper {
     font-family: 'Montserrat', sans-serif;
     margin: 5% 10%;
@@ -10,7 +8,7 @@
     justify-content: center;
 }
 .add-review-h2 {
-    font-weight: bold;
+    font-weight: bold; 
     font-size: 40px;
 }
 
@@ -98,3 +96,19 @@
 .add-review-cancel:hover{
     background-color: #FF5A5F;
 }
+
+.add-review-button {
+    background-color: rgb(67, 67, 67);
+    color: white;
+    padding: 10px;
+    width: 150px;
+    border-radius: 30px;
+    border: thin solid 	rgb(67, 67, 67);
+    margin: 20px auto;
+    margin-right: 30px;
+}
+
+.add-review-button:hover{
+    background-color: black;
+}
+
