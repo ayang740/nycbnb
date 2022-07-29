@@ -27,7 +27,9 @@ const OneSpot = () => {
     
         return history.push(`/`);
       };
-    
+    if(!spot) {
+        return null
+    }
     
     return (
         <div className='spot-wrapper'>

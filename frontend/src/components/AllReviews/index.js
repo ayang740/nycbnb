@@ -18,6 +18,7 @@ const ReviewList = () => {
         dispatch(getReviews(spotId))
     }, [dispatch, spotId])
 
+
     if (!reviews || !spot) {
         return null;
     }
