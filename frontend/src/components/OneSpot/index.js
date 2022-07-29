@@ -2,6 +2,8 @@ import { useParams, useHistory, Link } from 'react-router-dom';
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { getSpots, removeSpot } from '../../store/spot';
+import ReviewList from '../AllReviews';
+import AddReviewModal from '../addReviewModal';
 
 import './oneSpot.css'
 
@@ -59,6 +61,12 @@ const OneSpot = () => {
                         </div>
                     )
                 }
+            </div>
+            <div>
+                <ReviewList />
+            </div>
+            <div>
+                <AddReviewModal />
             </div>
         </div>
     )
