@@ -60,3 +60,32 @@
     flex-direction: row;
     justify-content: space-around;
 }
+
+.profile-dropdown {
+    list-style: none;
+  background-color: white;
+  padding: 4px;
+  border-radius: 10px;
+  border: 1px solid white;
+  box-shadow: 2px 2px 2px lightgray;
+}
+
+.logout-button {
+    font-family: 'Montserrat', sans-serif;
+    background-color: white;
+    border: 1px solid white;
+    font-size: 16px;
+}
+.logout-button:hover {
+    background-color: rgb(248, 248, 248);
+}
+
+.host-home-link {
+    text-decoration: none;
+    color: black;
+    font-size: 16px;
+}
+
+.host-home-link:hover {
+    background-color: rgb(248, 248, 248);
+}

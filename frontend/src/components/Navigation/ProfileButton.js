@@ -39,12 +39,12 @@ function ProfileButton({ user }) {
   let sessionLinks;
   if (sessionUser) {
     sessionLinks = (
-      <div>
+      <div className="dropdown-components">
         <div>
           {user?.username}
         </div>
-        <NavLink to='/spots/add'>Host your Home</NavLink> 
-        <button onClick={logout}>Log Out</button>
+        <NavLink className='host-home-link' to='/spots/add'>Host your Home</NavLink> 
+        <button className='logout-button' onClick={logout}>Log Out</button>
       </div>
     );
   } else {
