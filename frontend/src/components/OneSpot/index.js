@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getSpots, removeSpot } from '../../store/spot';
 import ReviewList from '../AllReviews';
 import AddReviewModal from '../addReviewModal';
-
+import RatingStars from '../RatingStars';
 import './oneSpot.css'
 
 const OneSpot = () => {
@@ -34,8 +34,13 @@ const OneSpot = () => {
     return (
         <div className='spot-wrapper'>
             <div className='spot-grid'>
-                <div>{spot?.title}</div>
-                <div>{spot?.address}, {spot?.neighborhood}, {spot?.borough}</div>
+                <div className='spot-title'>{spot?.title}</div>
+                <div className='spot-top-div'>
+                    <div>
+                        <RatingStars id={spot.id}/>
+                    </div>
+                    <div className='spot-location'>{spot?.address}, {spot?.neighborhood}, {spot?.borough}</div>
+                </div>
                 <div className='spot-images'>
                     {spotImages && spotImages.map(image => {
                         return (
@@ -44,14 +49,18 @@ const OneSpot = () => {
                     })}
                 </div>
                 
-                <div>${spot?.price}/night</div>
                 <div className='spot-accommodations'>
-                    <div>{spot?.guests} guests </div>
-                    <div>{spot?.bedrooms} bedrooms</div>
-                    <div>{spot?.beds} beds</div>
-                    <div>{spot?.baths} baths</div>
+                    <div>{spot?.guests} guests · {spot?.bedrooms} bedrooms · {spot?.beds} beds · {spot?.baths} baths</div>
                 </div>
-                <div>{spot?.description}</div>
+                <div className='spot-middle-div'>
+                    <div className='spot-description'>{spot?.description}</div>
+                    <div className='spot-reservation'>
+                        <div>${spot?.price}/night</div>
+                        <div>
+                            <RatingStars id={spot.id}/>
+                        </div>
+                    </div>
+                </div>
 
                 {sessionUser?.id === spot?.userId && 
                     (

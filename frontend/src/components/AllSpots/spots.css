@@ -53,3 +53,9 @@
   display: inline;
   font-family: 'Montserrat', sans-serif;
 }
+
+.spot-list-info-div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
