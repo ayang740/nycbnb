@@ -47,7 +47,7 @@
 .profile-button {
     background-color: white;
     padding: 10px;
-    width: 70px;
+    width: 60px;
     border-radius: 20px;
     border: thin solid 	lightgray;
 }
@@ -62,12 +62,24 @@
 }
 
 .profile-dropdown {
-    list-style: none;
-  background-color: white;
-  padding: 4px;
-  border-radius: 10px;
-  border: 1px solid white;
-  box-shadow: 2px 2px 2px lightgray;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    background-color: white;
+    right: 0;
+    top: -120px;
+    margin-top: 180px;
+    margin-right: 10%;
+    width: 150px;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid white;
+    box-shadow: 0px 2px 8px lightgray;
+}
+.dropdown-components{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .logout-button {
@@ -75,6 +87,7 @@
     background-color: white;
     border: 1px solid white;
     font-size: 16px;
+    width: 100px;
 }
 .logout-button:hover {
     background-color: rgb(248, 248, 248);
