@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getReviews, removeReview } from "../../store/review";
+import './Review.css'
 
 const ReviewList = () => {
     const dispatch = useDispatch();
@@ -24,17 +25,17 @@ const ReviewList = () => {
     }
 
     return (
-        <div>
+        <div className='reviews-wrapper'>
             <h2> Reviews </h2>
             {spotReviews && spotReviews.map(review => {
                 return (
-                    <div key={review.id}>
+                    <div className='review-content' key={review.id}>
+                        <div>{}</div>
                         <div>{review.review}</div>
-                        <div>{review.rating}</div>
 
                         {sessionUser?.id === review?.userId &&
                         (
-                            <button
+                            <button className='review-delete'
                             onClick={async()=> await dispatch(removeReview(review.id))}
                             >Delete Review</button>
                         )
