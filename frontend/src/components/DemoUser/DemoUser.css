@@ -1,0 +1,11 @@
+.demouser-button{
+    background-color: #FF5A5F;
+    border-radius: 10px;
+    border: thin solid 	#FF5A5F;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+}
+.demouser-button:hover{
+    background-color: white;
+    color: #FF5A5F;
+}

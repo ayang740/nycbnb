@@ -8,16 +8,16 @@ const AddSpot = () => {
     const dispatch = useDispatch();
     const history = useHistory();
     
-    const [address, setAddress] = useState('somewhere');
-    const [neighborhood, setNeighborhood] = useState('somewhere');
-    const [borough, setBorough] = useState('Manhatten');
-    const [title, setTitle] = useState('new place');
-    const [description, setDescription] = useState('nice place');
-    const [price, setPrice] = useState(1);
-    const [guests, setGuests] = useState(1);
-    const [bedrooms, setBedrooms] = useState(1);
-    const [beds, setBeds] = useState(1);
-    const [baths, setBaths] = useState(1);
+    const [address, setAddress] = useState('');
+    const [neighborhood, setNeighborhood] = useState('');
+    const [borough, setBorough] = useState('');
+    const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
+    const [price, setPrice] = useState(0);
+    const [guests, setGuests] = useState(0);
+    const [bedrooms, setBedrooms] = useState(0);
+    const [beds, setBeds] = useState(0);
+    const [baths, setBaths] = useState(0);
     const [images, setImages] = useState('')
     const [errors, setErrors] = useState([]);
     

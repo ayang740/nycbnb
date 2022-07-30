@@ -11,9 +11,9 @@ const AddReviewModal = () => {
 
     return (
         <AddReviewModalContext.Provider value={{showModal, setShowModal}}>
-            <button onClick={() => setShowModal(true)}>Leave a Review</button>
+            <button className='add-review-button' onClick={() => setShowModal(true)}>Leave a Review</button>
             {showModal && (
-                <Modal className='modal-wrapper' onClose={() => setShowModal(false)}>
+                <Modal onClose={() => setShowModal(false)}>
                     <AddReview />
                 </Modal>
       )}
