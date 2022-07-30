@@ -64,11 +64,11 @@ const OneSpot = () => {
 
                 {sessionUser?.id === spot?.userId && 
                     (
-                        <div>
+                        <div className='spot-modification'>
                             <Link to={`/spots/${spot.id}/edit`}>
-                                <button>Edit</button>
+                                <button className='spot-modification-button'>Edit</button>
                             </Link>
-                            <button onClick={deleteSpot}>Delete Listing</button>
+                            <button className='spot-modification-button' onClick={deleteSpot}>Delete Listing</button>
                         </div>
                     )
                 }

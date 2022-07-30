@@ -1,0 +1,22 @@
+.reviews-wrapper {
+    width: 100%;
+    border-top: 1px solid lightgrey;
+    border-bottom: 1px solid lightgrey;
+}
+
+.review-delete {
+    background-color: rgb(67, 67, 67);
+    color: white;
+    padding: 5px;
+    width: 80px;
+    border-radius: 30px;
+    border: thin solid 	rgb(67, 67, 67);
+    margin: 20px auto;
+    margin-right: 10px;
+    font-size: 10px;
+}
+
+.review-delete:hover{
+    background-color: black;
+  }
+  
