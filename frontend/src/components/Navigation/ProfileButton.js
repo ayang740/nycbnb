@@ -43,7 +43,7 @@ function ProfileButton({ user }) {
         <div>
           {user?.username}
         </div>
-        <NavLink to='/spots/add'>Host your Home</NavLink>
+        <NavLink to='/spots/add'>Host your Home</NavLink> 
         <button onClick={logout}>Log Out</button>
       </div>
     );

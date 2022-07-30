@@ -54,3 +54,9 @@
 .profile-button:hover {
     box-shadow: 2px 2px 2px lightgray;
 }
+
+.nav-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
