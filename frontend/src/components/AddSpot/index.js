@@ -10,7 +10,7 @@ const AddSpot = () => {
     
     const [address, setAddress] = useState('');
     const [neighborhood, setNeighborhood] = useState('');
-    const [borough, setBorough] = useState('');
+    const [borough, setBorough] = useState('Manhatten');
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState(0);
@@ -28,6 +28,7 @@ const AddSpot = () => {
 
     const handleSubmitSpot = async (e) => {
         e.preventDefault();
+        setErrors([]);
         const spotData = {
           address,
           neighborhood,
@@ -42,8 +43,13 @@ const AddSpot = () => {
           userId,
           images,
         };
-
-        const newSpot = await dispatch(createSpot(spotData));
+        const newSpot = await dispatch(createSpot(spotData))
+            .catch(async (res) => {
+                const data = await res.json();
+                if (data) {
+                    setErrors(data);
+                }
+            })
 
         if (newSpot) {
             setErrors([]);
@@ -62,6 +68,9 @@ const AddSpot = () => {
         <div className='add-spot-wrapper'>
             <h1 className='add-spot-h1'>Add Your Listing</h1>
             <form className='add-spot-form' onSubmit={handleSubmitSpot}>
+                <ul>
+                    {!!errors.errors && errors.errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                </ul>
                 <label className='add-spot-label'> Address:
                     <input
                         className='add-spot-input'
