@@ -2,11 +2,14 @@
     width: 100%;
     border-top: 1px solid lightgrey;
     border-bottom: 1px solid lightgrey;
+    max-width: 100%;
 }
 
 .reviews-block {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
+
 }
 .review-content {
     padding: 5% 20%;

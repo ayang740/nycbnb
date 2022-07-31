@@ -44,7 +44,7 @@ const OneSpot = () => {
                 <div className='spot-images'>
                     {spotImages && spotImages.map(image => {
                         return (
-                            <img className='spot-image' src={image.url} alt="array"/>
+                            <img key={image.id} className='spot-image' src={image.url} alt="array"/>
                         )
                     })}
                 </div>
