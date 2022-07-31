@@ -32,6 +32,9 @@ function App() {
           <Route exact path="/spots/:spotId/edit">
             <EditSpot />
           </Route>
+          <Route>
+            Page does not exist
+          </Route>
         </Switch>
       )}
     </>

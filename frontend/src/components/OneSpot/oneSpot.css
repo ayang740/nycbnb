@@ -86,8 +86,7 @@
     width: 150px;
     border-radius: 30px;
     border: thin solid 	rgb(67, 67, 67);
-    margin: 20px auto;
-    margin-right: 30px;
+    margin: 30px;
 }
 
 .spot-modification-button:hover{
