@@ -2,7 +2,6 @@ import { useParams, useHistory, Link } from 'react-router-dom';
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { getSpots, removeSpot } from '../../store/spot';
-import { getReviews } from '../../store/review';
 import ReviewList from '../AllReviews';
 import AddReviewModal from '../addReviewModal';
 import RatingStars from '../RatingStars';

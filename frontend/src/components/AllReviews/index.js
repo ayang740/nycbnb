@@ -17,7 +17,7 @@ const ReviewList = () => {
 
     useEffect(() => {
         dispatch(getReviews(spotId))
-    }, [dispatch, spotId])
+    }, [dispatch, spotId, reviews])
 
 
 
