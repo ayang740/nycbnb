@@ -15,6 +15,7 @@ const AddReview = () => {
     
     const [review, setReview] = useState('');
     const [rating, setRating] = useState('');
+    const [errors, setErrors] = useState([]);
     
     let userId;
     if (sessionUser) userId = sessionUser.id;
@@ -24,16 +25,24 @@ const AddReview = () => {
 
     const handleSubmitReview = async (e) => {
         e.preventDefault();
+        setErrors([]);
         const reviewData = {
           review,
           rating,
           userId,
           spotId,
         };
-
-        const newReview = await dispatch(createReview(reviewData));
-
+        
+        const newReview = await dispatch(createReview(reviewData))
+            .catch(async (res) => {
+                const data = await res.json();
+                if (data) {
+                    setErrors(data);
+                }
+            })
+            
         if (newReview) {
+            setErrors([]);
             setShowModal(false)
             history.push(`/spots/${spot.id}`);
         }
@@ -42,6 +51,7 @@ const AddReview = () => {
     const handleCancelClick = () => {
         setRating('');
         setReview('');
+        setErrors([]);
         setShowModal(false)
       };
 
@@ -49,6 +59,9 @@ const AddReview = () => {
         <div className='review-form-wrapper'>
             <h2 className='add-review-h2'>Review</h2>
             <form className='add-review-form' onSubmit={handleSubmitReview}>
+                <ul>
+                    {!!errors.errors && errors.errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                </ul>
                 <label className='add-review-label'> Tell us about your stay
                     <textarea 
                     className='add-reivew-input-textarea'
@@ -60,9 +73,7 @@ const AddReview = () => {
                 <label className='add-review-label'> Rate your stay
                     <input
                     className='add-review-input-select'
-                    type="number"
-                    min='1'
-                    max='5'
+                    type="number"   
                     required
                     value={rating}
                     onChange={(e) => setRating(e.target.value)} />

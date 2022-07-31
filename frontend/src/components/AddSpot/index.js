@@ -24,7 +24,7 @@ const AddSpot = () => {
     const sessionUser = useSelector(state => state.session.user);
     let userId;
     if (sessionUser) userId = sessionUser.id;
-    if (!sessionUser) return <Redirect to="/login" />;
+    if (!sessionUser) return <Redirect to="/" />;
 
     const handleSubmitSpot = async (e) => {
         e.preventDefault();
