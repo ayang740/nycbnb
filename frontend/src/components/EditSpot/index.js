@@ -8,6 +8,7 @@ const EditSpot = () => {
     const dispatch = useDispatch();
     const { spotId } = useParams();
     const spot = useSelector((state) => state.spot[spotId]);
+    const spotImages = spot?.Images
 
     const history = useHistory();
 
@@ -22,7 +23,8 @@ const EditSpot = () => {
     const [beds, setBeds] = useState(1);
     const [baths, setBaths] = useState(1);
     const [images, setImages] = useState('');
-
+    const [errors, setErrors] = useState([]);
+ 
     const addValues = () => {
         setAddress(spot.address)
         setNeighborhood(spot.neighborhood)
@@ -34,7 +36,7 @@ const EditSpot = () => {
         setBedrooms(spot.bedrooms)
         setBeds(spot.beds)
         setBaths(spot.baths)
-        setImages(spot.images)
+        setImages(spotImages[0].url)
     }
     
     useEffect(() => {
@@ -49,12 +51,13 @@ const EditSpot = () => {
 
     const handleCancelClick = (e) => {
         e.preventDefault();
+        setErrors([]);
         history.push(`/spots/${spotId}`);
     };
 
     const handleEditSpot = async (e) => {
         e.preventDefault();
-    
+        setErrors([]);
         const spotData = {
           address,
           neighborhood,
@@ -69,16 +72,28 @@ const EditSpot = () => {
           images,
 
         };
-        console.log(spotData)
-        const updatedSpot = await dispatch(editSpot(spotData, spotId));
-        history.push(`/spots/${spot.id}`);
-        return updatedSpot
+
+        const updatedSpot = await dispatch(editSpot(spotData, spotId))
+            .catch(async (res) => {
+                const data = await res.json();
+                if (data) {
+                    setErrors(data);
+                }
+            })
+        
+        if(updatedSpot) {
+            setErrors([]);
+            history.push(`/spots/${spot.id}`);
+        }
       };
 
       return (
         <div className='add-spot-wrapper'>
             <h1 className='add-spot-h1'>Edit Listing</h1>
             <form className='add-spot-form' onSubmit={handleEditSpot}>
+                <ul className='add-spot-errors'>
+                    {!!errors.errors && errors.errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                </ul>
                 <label className='add-spot-label'> Address:
                     <input 
                         className='add-spot-input'

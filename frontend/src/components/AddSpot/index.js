@@ -68,7 +68,7 @@ const AddSpot = () => {
         <div className='add-spot-wrapper'>
             <h1 className='add-spot-h1'>Add Your Listing</h1>
             <form className='add-spot-form' onSubmit={handleSubmitSpot}>
-                <ul>
+                <ul className='add-spot-errors'>
                     {!!errors.errors && errors.errors.map((error, idx) => <li key={idx}>{error}</li>)}
                 </ul>
                 <label className='add-spot-label'> Address:

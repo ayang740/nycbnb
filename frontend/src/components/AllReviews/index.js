@@ -32,6 +32,7 @@ const ReviewList = () => {
                 {spotReviews && spotReviews.map(review => {
                     return (
                         <div className='review-content' key={review.id}>
+
                             <div>{review.review}</div>
 
                             {sessionUser?.id === review?.userId &&

@@ -52,15 +52,15 @@ export const createReview = (reviewData) => async dispatch => {
 
 //delete review
 
-export const removeReview = reviewId => async dispatch => {
-    const response = await csrfFetch(`/api/reviews/${reviewId}`, {
-      method: 'DELETE',
-    });
-    if (response.ok) {
-      dispatch(deleteReview(reviewId));
-      return response
+    export const removeReview = reviewId => async dispatch => {
+      const response = await csrfFetch(`/api/reviews/${reviewId}`, {
+        method: 'DELETE'
+      });
+
+      if (response.ok) {
+        dispatch(deleteReview(reviewId))
+      }
     }
-  }
   //reducer
   const initialState = {}
   

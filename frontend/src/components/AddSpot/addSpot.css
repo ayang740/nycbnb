@@ -19,6 +19,11 @@
     margin: 0 20%;
 }
 
+.add-spot-errors {
+    list-style: none;
+    color: red;
+}
+
 .add-spot-label{
     margin: 10px;
     display: flex;
