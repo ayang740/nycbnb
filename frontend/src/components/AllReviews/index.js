@@ -20,6 +20,7 @@ const ReviewList = () => {
     }, [dispatch, spotId])
 
 
+
     if (!reviews || !spot) {
         return null;
     }
@@ -27,22 +28,24 @@ const ReviewList = () => {
     return (
         <div className='reviews-wrapper'>
             <h2> Reviews </h2>
-            {spotReviews && spotReviews.map(review => {
-                return (
-                    <div className='review-content' key={review.id}>
-                        <div>{}</div>
-                        <div>{review.review}</div>
+            <div className='reviews-block'>
+                {spotReviews && spotReviews.map(review => {
+                    return (
+                        <div className='review-content' key={review.id}>
 
-                        {sessionUser?.id === review?.userId &&
-                        (
-                            <button className='review-delete'
-                            onClick={async()=> await dispatch(removeReview(review.id))}
-                            >Delete Review</button>
-                        )
-                        }
-                    </div>
-                )
-            })}
+                            <div>{review.review}</div>
+
+                            {sessionUser?.id === review?.userId &&
+                            (
+                                <button className='review-delete'
+                                onClick={async()=> await dispatch(removeReview(review.id))}
+                                >Delete Review</button>
+                            )
+                            }
+                        </div>
+                    )
+                })}
+            </div>
         </div>
     )
 }

@@ -4,6 +4,14 @@
     border-bottom: 1px solid lightgrey;
 }
 
+.reviews-block {
+    display: flex;
+    flex-direction: row;
+}
+.review-content {
+    padding: 0 20%;
+}
+
 .review-delete {
     background-color: rgb(67, 67, 67);
     color: white;

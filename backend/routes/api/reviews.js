@@ -27,7 +27,7 @@ const validateReview = [
 
 const router = express.Router();
 
-//get all reviews
+//get all reviews 
 router.get('/',
   asyncHandler(async (req, res) => {
     const reviews = await Review.findAll();
