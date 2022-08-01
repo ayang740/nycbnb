@@ -10,7 +10,7 @@ const AddSpot = () => {
     
     const [address, setAddress] = useState('');
     const [neighborhood, setNeighborhood] = useState('');
-    const [borough, setBorough] = useState('Manhatten');
+    const [borough, setBorough] = useState('Manhattan');
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState(0);
@@ -91,7 +91,7 @@ const AddSpot = () => {
                 </label>
                 <label className='add-spot-label'> Borough:
                     <select className='add-spot-input-select' value={borough} onChange={(e) => setBorough(e.target.value)} required>
-                        <option >Manhatten</option>
+                        <option >Manhattan</option>
                         <option >Queens</option>
                         <option >Brooklyn</option>
                         <option >Bronx</option>
