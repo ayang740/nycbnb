@@ -1,3 +1,3 @@
 # nycbnb
 
-https://nyc-bnb.herokuapp.com/
+[Create React App](https://nyc-bnb.herokuapp.com/)
